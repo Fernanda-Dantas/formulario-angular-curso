@@ -1,5 +1,6 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { ConsultaCepService } from '../service/consulta-cep.service';
 
 @Directive({
   selector: '[maiorIdadeValidator]',
@@ -11,16 +12,14 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 })
 export class MaiorIdadeDirective implements Validator {
 
-  constructor() { }
+  constructor(private ConsultaCepService: ConsultaCepService) { }
+
   validate(control: AbstractControl): ValidationErrors | null {
     const dataNascimento = control.value;
     const anoNascimento = new Date(dataNascimento).getFullYear();
-    const anoNascimentoMais18 = anoNascimento + 18;
-
+    const ateDezoito = anoNascimento + 18;
     const anoAtual = new Date().getFullYear();
-
-    const ehMaior = anoNascimentoMais18 <= anoAtual;
-
+    const ehMaior = ateDezoito <= anoAtual;
     return ehMaior ? null : {'maiorIdadeValidator': true};
   }
 

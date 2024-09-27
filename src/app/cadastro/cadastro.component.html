@@ -52,12 +52,12 @@
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="cep">CEP</label>
-      <input name="cep" id="cep" class="campo__escrita" ngModel required #cep="ngModel" pattern="^(\d{5})(-?\d{3})$"
+      <input name="cep" id="cep" class="campo__escrita" ngModel required validadorCEP #cep="ngModel" pattern="^(\d{5})(-?\d{3})$"
         minlength="8" maxlength="9" (blur)="consultaCEP($event, f)" />
       <div *ngIf="(cep?.invalid && cep?.touched) || cep?.dirty">
         <app-mensagem *ngIf="cep?.errors?.['required']" mensagem="O campo de CEP é obrigatório."></app-mensagem>
-        <app-mensagem *ngIf="cep?.errors?.['pattern']"
-          mensagem="O campo de CEP deve seguir este exemplo: 12345-456."></app-mensagem>
+        <app-mensagem *ngIf="cep?.errors?.['pattern']" mensagem="O campo de CEP deve seguir este exemplo: 12345-456."></app-mensagem>
+        <app-mensagem *ngIf="cep?.errors?.['validadorCEP']" mensagem="CEP informado não existe"></app-mensagem>
       </div>
       <div id="erro"></div>
     </div>
@@ -138,10 +138,6 @@
           <option value="TO">Tocantins</option>
           <option value="EX">Estrangeiro</option>
         </select>
-        <div *ngIf="(estado?.invalid && estado?.touched) || estado?.dirty"></div>
-          <app-mensagem *ngIf="estado?.errors?.['required']"
-           mensagem="O campo estado é obrigatório."
-         ></app-mensagem>
          </div>
     </div>
     <button type="submit" class="formulario__botao">Enviar formulário</button>
