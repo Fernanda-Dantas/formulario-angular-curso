@@ -3,7 +3,6 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 
 @Directive({
   selector: '[maiorIdadeValidator]',
-  standalone: true,
   providers: [{
     provide: NG_VALIDATORS,
     useExisting: MaiorIdadeDirective,
@@ -22,7 +21,7 @@ export class MaiorIdadeDirective implements Validator {
 
     const ehMaior = anoNascimentoMais18 <= anoAtual;
 
-    return ehMaior ? null : {'maiorIdadeValidator' : true}
+    return ehMaior ? null : {'maiorIdadeValidator': true};
   }
 
 
